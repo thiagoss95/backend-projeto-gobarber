@@ -1,6 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
 
-import Appointment from '../models/Appointments';
+import Appointment from '../models/Appointment';
 
 // Define o repositorio e a entidade que ele pertence
 // A classe extende Repository para receber todos os métodos prontos que existem
