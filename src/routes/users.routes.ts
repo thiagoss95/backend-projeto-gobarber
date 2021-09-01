@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { UserResponseInterface } from '../interfaces/UserResponseInterface';
 import CreateUserService from '../services/CreateUserService';
 
 const userRouter = Router();
@@ -15,7 +16,11 @@ userRouter.post('/', async (request, response) => {
       password,
     });
 
-    return response.json(user);
+    // Para que não seja retornada a senha no response
+    const userResponse: UserResponseInterface = { ...user };
+    delete userResponse.password;
+
+    return response.json(userResponse);
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }
