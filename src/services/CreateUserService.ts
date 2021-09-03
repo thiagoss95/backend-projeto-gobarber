@@ -19,7 +19,7 @@ class CreateUserService {
     });
 
     if (userExist) {
-      throw Error('Email already in use.');
+      throw new Error('Email already in use.');
     }
 
     // Criptografia da senha
