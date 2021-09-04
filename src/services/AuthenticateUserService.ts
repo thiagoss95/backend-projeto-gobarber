@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import User from '../models/User';
+import authConfig from '../config/authConfig';
 
 interface Request {
   email: string;
@@ -34,9 +35,12 @@ class AuthenticateUserService {
     }
 
     // Autenticação ocorreu corretamente
-    const token = sign({}, '7a1fd6322b01d21e8d682770ba3a7709', {
+
+    const { secret, expiresIn } = authConfig.jwt;
+
+    const token = sign({}, secret, {
       subject: user.id,
-      expiresIn: '1d',
+      expiresIn,
     });
 
     return { user, token };
